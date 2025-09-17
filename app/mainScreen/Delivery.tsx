@@ -1,7 +1,7 @@
 import React from 'react';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { DeliveryIcon } from '../icon/Delivery';
-import { BackIcon } from '../icon/Back';
+import { BackRightIcon } from '../icon/BackRight';
 
 const Delivery = () => {
   return (
@@ -23,7 +23,7 @@ const Delivery = () => {
           </View>
         </View>
         <View style={styles.iconTwoContainer}>
-          <BackIcon />
+          <BackRightIcon />
         </View>
       </View>
     </TouchableOpacity>

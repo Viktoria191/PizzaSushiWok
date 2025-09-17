@@ -1,6 +1,9 @@
 import React from 'react';
 import { StyleSheet, View, FlatList, ListRenderItemInfo } from 'react-native';
 import { ButtonProps, ButtonText } from '../common/ButtonText';
+import { useNavigation } from '@react-navigation/native';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { RootStackParamList } from '../navigation/types';
 
 const buttonData: ButtonProps[] = [
   { id: 1, text: 'Пицца' },
@@ -13,13 +16,24 @@ const buttonData: ButtonProps[] = [
   { id: 8, text: 'Десерты' },
 ];
 
-const renderItem = ({ item }: ListRenderItemInfo<ButtonProps>) => (
-  <ButtonText id={item.id} text={item.text} />
-);
-
-const keyExtractorButtons = (item: ButtonProps) => `${item.id}`;
-
 const MenuButtons = () => {
+  const navigation =
+    useNavigation<NativeStackNavigationProp<RootStackParamList>>();
+
+  const handlePizzaPress = () => {
+    navigation.navigate('categoryPizza');
+  };
+
+  const renderItem = ({ item }: ListRenderItemInfo<ButtonProps>) => (
+    <ButtonText
+      id={item.id}
+      text={item.text}
+      onPress={item.text === 'Пицца' ? handlePizzaPress : undefined}
+    />
+  );
+
+  const keyExtractorButtons = (item: ButtonProps) => `${item.id}`;
+
   return (
     <View>
       <FlatList

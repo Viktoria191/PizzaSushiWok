@@ -1,16 +1,32 @@
 import React from 'react';
-import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
+import {
+  StyleSheet,
+  Text,
+  View,
+  TouchableOpacity,
+  ViewStyle,
+  TextStyle,
+  StyleProp,
+} from 'react-native';
 
 export type ButtonProps = {
   id: number;
   text: string;
+  onPress?: () => void;
+  containerStyle?: StyleProp<ViewStyle>;
+  textStyle?: StyleProp<TextStyle>;
 };
 
-const ButtonText = ({ text }: ButtonProps) => {
+const ButtonText = ({
+  text,
+  onPress,
+  containerStyle,
+  textStyle,
+}: ButtonProps) => {
   return (
-    <TouchableOpacity activeOpacity={0.7} onPress={() => {}}>
-      <View style={styles.container}>
-        <Text style={styles.text}>{text}</Text>
+    <TouchableOpacity activeOpacity={0.7} onPress={onPress}>
+      <View style={[styles.container, containerStyle]}>
+        <Text style={[styles.text, textStyle]}>{text}</Text>
       </View>
     </TouchableOpacity>
   );

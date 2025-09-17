@@ -10,6 +10,9 @@ import {
 import { Pizza } from '../store/pizzas/types';
 import { FavoriteIcon } from '../icon/Favorite';
 import { NoFavoriteIcon } from '../icon/NoFavorite';
+import { useNavigation } from '@react-navigation/native';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { RootStackParamList } from '../navigation/types';
 
 const { width } = Dimensions.get('window');
 
@@ -20,12 +23,30 @@ const PizzaItem = ({
   description,
   price,
   favorite,
-}: Pizza) => {
+}: Omit<
+  Pizza,
+  | 'fats'
+  | 'calories'
+  | 'proteins'
+  | 'carbohydrates'
+  | 'parameters'
+  | 'sizes'
+  | 'supplements'
+>) => {
+  const navigation =
+    useNavigation<NativeStackNavigationProp<RootStackParamList>>();
+
+  const handlePress = () => {
+    navigation.navigate('pizza', {
+      pizzaId: id,
+    });
+  };
+
   return (
-    <TouchableOpacity activeOpacity={0.7} onPress={() => {}}>
-      {id !== '1' ? <View style={styles.viewStyle} /> : null}
+    <TouchableOpacity activeOpacity={0.7} onPress={handlePress}>
+      {id !== 1 ? <View style={styles.viewStyle} /> : null}
       <View style={styles.container}>
-        <Image source={image} style={styles.image} resizeMode='cover' />
+        <Image source={image} style={styles.image} resizeMode="cover" />
         <View style={styles.containerText}>
           <Text style={styles.title}>{title}</Text>
           <Text style={styles.description}>{description}</Text>
